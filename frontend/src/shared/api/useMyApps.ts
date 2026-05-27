@@ -3,42 +3,38 @@ import type { AppItem } from "../types";
 
 interface FetchAppsParams {
   limit?: boolean;
-  details?: boolean;
-  dark_mode?: boolean;
+  userConfig?: boolean;
   skipInitialFetch?: boolean;
 }
 
 export const useMyApps = (
   {
     limit: initialLimit = true,
-    details: initialDetails = false,
-    dark_mode: initialDarkMode = true,
+    userConfig: initialUserConfig = true,
     skipInitialFetch = false,
   }: FetchAppsParams = {}
 ) => {
   const [apps, setApps] = useState<AppItem[]>([]);
-  const [darkMode, setDarkMode] = useState(initialDarkMode);
+  const [darkMode, setDarkMode] = useState(initialUserConfig);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>(null);
 
   const [limit, setLimit] = useState(initialLimit);
-  const [details, setDetails] = useState(initialDetails);
-  const [dark_mode, setDarkModeParam] = useState(initialDarkMode);
+  const [userConfig, setUserConfigParam] = useState(initialUserConfig);
   const [hasFetched, setHasFetched] = useState(!skipInitialFetch);
   const [fetchTrigger, setFetchTrigger] = useState(0);
 
   const fetchApps = useCallback((params: FetchAppsParams = {}) => {
     setHasFetched(true);
     if (params.limit !== undefined) setLimit(params.limit);
-    if (params.details !== undefined) setDetails(params.details);
-    if (params.dark_mode !== undefined) setDarkModeParam(params.dark_mode);
+    if (params.userConfig !== undefined) setUserConfigParam(params.userConfig);
     setFetchTrigger((t) => t + 1);
   }, []);
 
   const updateDarkMode = useCallback(async (newDarkMode: boolean) => {
     setDarkMode(newDarkMode);
-    setDarkModeParam(newDarkMode);
+    setUserConfigParam(newDarkMode);
 
     try {
       const response = await fetch(
@@ -76,7 +72,7 @@ export const useMyApps = (
       setLoading(true);
       try {
         const response = await fetch(
-          "http://localhost:3001/mainpage/get-app-lists",
+          "http://localhost:3001/mainpage/get-app-list",
           {
             method: "POST",
             headers: {
@@ -84,8 +80,7 @@ export const useMyApps = (
             },
             body: JSON.stringify({
               limit,
-              details,
-              dark_mode,
+              userConfig,
             }),
           }
         );
@@ -119,7 +114,7 @@ export const useMyApps = (
       ignore = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [limit, details, hasFetched, fetchTrigger]); // Intentionally omitting dark_mode so toggling theme doesn't re-fetch apps
+  }, [limit, hasFetched, fetchTrigger]); // Intentionally omitting dark_mode so toggling theme doesn't re-fetch apps
 
   const setAppFavLocally = useCallback((app_id: number, isFavorite: boolean) => {
     setApps((prev) => prev.map((a) => (a.app_id === app_id ? { ...a, fav_app: isFavorite } : a)));
@@ -130,7 +125,7 @@ export const useMyApps = (
       const response = await fetch("http://localhost:3001/mainpage/manage-fav-app", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ app_id, isFavorite }),
+        body: JSON.stringify({ app_id, isFavorite, dark_mode: darkMode }),
       });
       const data = await response.json();
       if (data?.statusCode === "10000") {
@@ -141,7 +136,7 @@ export const useMyApps = (
     } catch {
       return false;
     }
-  }, [setAppFavLocally]);
+  }, [setAppFavLocally, darkMode]);
 
   return {
     apps,

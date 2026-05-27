@@ -73,7 +73,7 @@ function ViewAllAppsDrawer({
             </div>
           ) : (
             filteredDrawerApps.map((app) => (
-              <AppRow key={app.name} app={app} isFav={app.fav_app ?? false} onToggleFav={requestToggleFav} compact />
+              <AppRow key={app.app_id} app={app} isFav={app.fav_app ?? false} onToggleFav={requestToggleFav} compact />
             ))
           )}
         </div>

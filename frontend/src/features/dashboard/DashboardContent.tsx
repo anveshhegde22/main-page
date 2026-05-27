@@ -137,7 +137,7 @@ const DashboardContent = memo(function DashboardContent({
       <WorkflowTable workflowStatuses={workflowStatuses} workflows={workflows} setMaximizedSection={setMaximizedSection} />
 
       <div className="core-rounded-2xl core-px-5 core-py-3 core-flex core-flex-wrap core-items-center core-justify-between core-gap-2 core-text-[11px] core-bg-cardAlt-light dark:core-bg-cardAlt-dark core-border core-border-borderBase-light dark:core-border-borderBase-dark core-text-textMuted-light dark:core-text-textMuted-dark">
-        <span>© 2026 pFirst 2.0 · Tata Motors</span>
+        <span>© {new Date().getFullYear()} pFirst 2.0 · Tata Motors</span>
       </div>
     </>
   );

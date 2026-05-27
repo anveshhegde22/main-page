@@ -55,6 +55,15 @@ export default function MaximizedRequestStatusChart({
               </div>
             ))}
           </div>
+          {pieData.length === 0 ? (
+            <div className="core-flex-1 core-min-h-[240px] sm:core-min-h-[300px] core-flex core-flex-col core-items-center core-justify-center core-gap-3 core-rounded-2xl core-border-2 core-border-dashed core-border-borderBase-light dark:core-border-borderBase-dark core-text-textMuted-light dark:core-text-textMuted-dark">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="core-opacity-30"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 6.364 15.364M12 3v9l4 4"/></svg>
+              <div className="core-text-center">
+                <p className="core-text-sm core-font-bold core-opacity-40">No data available</p>
+                <p className="core-text-xs core-opacity-30 core-mt-1">Request status breakdown will appear here</p>
+              </div>
+            </div>
+          ) : (
           <div className="core-flex-1 core-min-h-[240px] sm:core-min-h-[300px] core-bg-card-light dark:core-bg-card-dark core-p-4 sm:core-p-5 lg:core-p-6 core-rounded-3xl core-border core-border-borderBase-light dark:core-border-borderBase-dark core-shadow-2xl core-flex core-flex-col">
             <div className="core-flex-1 core-min-h-0 core-w-full">
               <ResponsiveContainer width="100%" height="100%">
@@ -77,6 +86,7 @@ export default function MaximizedRequestStatusChart({
               </ResponsiveContainer>
             </div>
           </div>
+          )}
         </div>
       </div>
     </div>

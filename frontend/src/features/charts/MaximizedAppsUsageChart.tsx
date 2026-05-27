@@ -60,6 +60,15 @@ export default function MaximizedAppsUsageChart({
             </div>
           </div>
           <div className="core-flex-1 core-min-h-0 core-w-full">
+            {!(topAppsData[appUsageRange]?.length) ? (
+              <div className="core-h-full core-min-h-[200px] core-flex core-flex-col core-items-center core-justify-center core-gap-3 core-rounded-2xl core-border-2 core-border-dashed core-border-borderBase-light dark:core-border-borderBase-dark core-text-textMuted-light dark:core-text-textMuted-dark">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="core-opacity-30"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                <div className="core-text-center">
+                  <p className="core-text-sm core-font-bold core-opacity-40">No data available</p>
+                  <p className="core-text-xs core-opacity-30 core-mt-1">App usage data will appear here</p>
+                </div>
+              </div>
+            ) : (
             <ResponsiveContainer width="100%" height="100%">
               <BarChart layout="vertical" data={topAppsData[appUsageRange]} margin={{ left: 10, right: 30 }}>
                 <defs>
@@ -119,6 +128,7 @@ export default function MaximizedAppsUsageChart({
                 />
               </BarChart>
             </ResponsiveContainer>
+            )}
           </div>
         </div>
       </div>

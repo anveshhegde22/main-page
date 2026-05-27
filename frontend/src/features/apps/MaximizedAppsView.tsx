@@ -199,6 +199,7 @@ function MaximizedAppsView({
     const search = appSearch.toLowerCase();
     if (search) {
       result = result.filter(a =>
+        (a.app_id?.toString() || "").includes(search) ||
         a.name.toLowerCase().includes(search) ||
         a.tag.toLowerCase().includes(search) ||
         (a.category || a.details?.cat || "").toLowerCase().includes(search) ||
@@ -278,7 +279,7 @@ function MaximizedAppsView({
               </div>
             ) : filteredApps.map((app) => (
               <MaximizedAppCard
-                key={app.name}
+                key={app.app_id}
                 app={app}
                 isFav={app.fav_app ?? false}
                 isInfoOpen={openInfoApp === app.name}

@@ -169,8 +169,7 @@ export default function AppShell() {
       } else {
         fetchDrawerApps({
           limit: false,
-          details: false,
-          dark_mode: false,
+          userConfig: false,
         });
       }
     }
@@ -184,8 +183,7 @@ export default function AppShell() {
     } else if (appsView === "all") {
       fetchApps({
         limit: true,
-        details: false,
-        dark_mode: true,
+        userConfig: true,
       });
     }
   }, [appsView, fetchCardFavApps, fetchApps, selectedSearchApp]);
@@ -197,8 +195,7 @@ export default function AppShell() {
       }
       fetchMaximizedApps({
         limit: false,
-        details: true,
-        dark_mode: false,
+        userConfig: false,
       });
     }
     if (

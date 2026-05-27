@@ -51,25 +51,35 @@ export default function MaximizedPendingActivitiesChart({
               </div>
             ))}
           </div>
-          <div className="core-flex-1 core-min-h-[260px] core-bg-card-light dark:core-bg-card-dark core-p-4 core-rounded-3xl core-border core-border-borderBase-light dark:core-border-borderBase-dark core-shadow-2xl core-flex core-flex-col">
-            <div className="core-flex-1 core-min-h-0 core-w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={workflows} barSize={40}>
-                  <CartesianGrid strokeDasharray="3 3" stroke={dark ? "#1e1c38" : "#edeaf9"} vertical={false} />
-                  <XAxis dataKey="app" tick={{ fontSize: 12, fill: dark ? "#7b77a8" : "#7874a3" }} axisLine={false} tickLine={false} dy={10} />
-                  <YAxis domain={[0, 50]} ticks={[0, 10, 20, 30, 40, 50]} interval={0} tick={{ fontSize: 12, fill: dark ? "#7b77a8" : "#7874a3" }} axisLine={false} tickLine={false} width={40} />
-                  <Tooltip content={CustomTooltip} />
-                  <Bar dataKey="pending" fill="url(#barGradMax)" radius={[8, 8, 0, 0]} />
-                  <defs>
-                    <linearGradient id="barGradMax" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#38bdf8" />
-                      <stop offset="100%" stopColor="#6366f1" />
-                    </linearGradient>
-                  </defs>
-                </BarChart>
-              </ResponsiveContainer>
+            <div className="core-flex-1 core-min-h-[260px] core-bg-card-light dark:core-bg-card-dark core-p-4 core-rounded-3xl core-border core-border-borderBase-light dark:core-border-borderBase-dark core-shadow-2xl core-flex core-flex-col">
+              {workflows.length === 0 ? (
+                <div className="core-flex-1 core-flex core-flex-col core-items-center core-justify-center core-gap-3 core-rounded-2xl core-border-2 core-border-dashed core-border-borderBase-light dark:core-border-borderBase-dark core-text-textMuted-light dark:core-text-textMuted-dark">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="core-opacity-30"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+                  <div className="core-text-center">
+                    <p className="core-text-sm core-font-bold core-opacity-40">No data available</p>
+                    <p className="core-text-xs core-opacity-30 core-mt-1">Pending activities will appear here</p>
+                  </div>
+                </div>
+              ) : (
+              <div className="core-flex-1 core-min-h-0 core-w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={workflows} barSize={40}>
+                    <CartesianGrid strokeDasharray="3 3" stroke={dark ? "#1e1c38" : "#edeaf9"} vertical={false} />
+                    <XAxis dataKey="app" tick={{ fontSize: 12, fill: dark ? "#7b77a8" : "#7874a3" }} axisLine={false} tickLine={false} dy={10} />
+                    <YAxis domain={[0, 50]} ticks={[0, 10, 20, 30, 40, 50]} interval={0} tick={{ fontSize: 12, fill: dark ? "#7b77a8" : "#7874a3" }} axisLine={false} tickLine={false} width={40} />
+                    <Tooltip content={CustomTooltip} />
+                    <Bar dataKey="pending" fill="url(#barGradMax)" radius={[8, 8, 0, 0]} />
+                    <defs>
+                      <linearGradient id="barGradMax" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#38bdf8" />
+                        <stop offset="100%" stopColor="#6366f1" />
+                      </linearGradient>
+                    </defs>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+              )}
             </div>
-          </div>
         </div>
       </div>
     </div>

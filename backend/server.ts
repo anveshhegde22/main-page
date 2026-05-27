@@ -6,12 +6,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.post("/mainpage/get-app-lists", (req, res) => {
-    const { limit, details, dark_mode } = req.body;
+app.post("/mainpage/get-app-list", (req, res) => {
+    const { limit, userConfig } = req.body;
 
     let response = {};
 
-    if (limit === true && details === false && dark_mode === true) {
+    if (limit === true && userConfig === true) {
         response = {
             statusCode: "10000",
             message: "success",
@@ -30,7 +30,7 @@ app.post("/mainpage/get-app-lists", (req, res) => {
         };
     }
 
-    else if (limit === false && details === false && dark_mode === false) {
+    else if (limit === false && userConfig === false) {
         response = {
             statusCode: "10000",
             message: "success",
@@ -43,25 +43,6 @@ app.post("/mainpage/get-app-lists", (req, res) => {
                         { app_id: 2003, name: "OTracker CV", tag: "Generic customized web based workflow ecosystem, designed to facilitate the management of SoW at ERC", fav_app: true, accessType: "private", dot: "#34d399" },
                         { app_id: 2004, name: "OTracker PV", tag: "Generic customized web based workflow ecosystem, designed to facilitate the management of SoW at ERC", fav_app: true, accessType: "private", dot: "#ec4899" },
                         { app_id: 2005, name: "Finance Portal", tag: "Finance management system", fav_app: false, accessType: "private", dot: "#3b82f6" }
-                    ],
-                },
-            },
-        };
-    }
-
-    else if (details === true && dark_mode === false && limit === false) {
-        response = {
-            statusCode: "10000",
-            message: "success",
-            data: {
-                count: 1,
-                data: {
-                    apps: [
-                        { app_id: 2001, name: "pFirst Master", tag: "pFirst Master", fav_app: true, accessType: "private", dot: "#6366f1" },
-                        { app_id: 2002, name: "OTracker CV", tag: "Workflow ecosystem", fav_app: true, accessType: "private", dot: "#34d399" },
-                        { app_id: 2003, name: "OTracker PV", tag: "Project workflow ecosystem", fav_app: false, accessType: "private", dot: "#ec4899" },
-                        { app_id: 2004, name: "Asset Tracker", tag: "Asset monitoring platform", fav_app: true, accessType: "public", dot: "#f59e0b" },
-                        { app_id: 2005, name: "HR Connect", tag: "Employee management portal", fav_app: false, accessType: "private", dot: "#8b5cf6" }
                     ],
                 },
             },
@@ -121,18 +102,18 @@ app.post("/mainpage/get-fav-list", (req, res) => {
 });
 
 app.post("/mainpage/manage-fav-app", (req, res) => {
-    const { app_id, isFavorite } = req.body;
+    const { app_id, isFavorite, dark_mode } = req.body;
     let response = {};
     if (isFavorite) {
         response = {
             statusCode: "10000",
-            message: `App ${app_id} added to favorites`,
+            message: `App ${app_id} added to favorites ${dark_mode}`,
         };
     }
     else {
         response = {
             statusCode: "10000",
-            message: `App ${app_id} removed from favorites`,
+            message: `App ${app_id} removed from favorites ${dark_mode}`,
         };
     }
 

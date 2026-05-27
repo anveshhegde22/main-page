@@ -77,7 +77,7 @@ function AppSection({
         {filteredCardApps.length === 0
           ? <div className="core-px-5 core-py-8 core-text-center core-text-[12px] core-text-textMuted-light dark:core-text-textMuted-dark">{cardEmptyMessage}</div>
           : filteredCardApps.map((app) => (
-            <AppRow key={app.name} app={app} isFav={app.fav_app ?? false} onToggleFav={requestToggleFav} compact />
+            <AppRow key={app.app_id} app={app} isFav={app.fav_app ?? false} onToggleFav={requestToggleFav} compact />
           ))}
       </div>
 

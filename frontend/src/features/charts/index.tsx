@@ -76,6 +76,12 @@ function Charts({
             </button>
           </div>
         </div>
+        {workflows.length === 0 ? (
+          <div className="core-h-[160px] core-flex core-flex-col core-items-center core-justify-center core-gap-2 core-rounded-xl core-border-2 core-border-dashed core-border-borderBase-light dark:core-border-borderBase-dark core-text-textMuted-light dark:core-text-textMuted-dark">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="core-opacity-40"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+            <p className="core-text-[11px] core-font-semibold core-opacity-50">No data available</p>
+          </div>
+        ) : (
         <ResponsiveContainer width="100%" height={160}>
           <BarChart data={workflows} barSize={20}>
             <CartesianGrid strokeDasharray="3 3" stroke={dark ? "#1e1c38" : "#edeaf9"} vertical={false} />
@@ -91,6 +97,7 @@ function Charts({
             </defs>
           </BarChart>
         </ResponsiveContainer>
+        )}
       </div>
 
       <div className="core-rounded-2xl core-p-5 core-shadow-lg core-bg-card-light dark:core-bg-card-dark core-border core-border-borderBase-light dark:core-border-borderBase-dark">
@@ -122,6 +129,12 @@ function Charts({
             </button>
           </div>
         </div>
+        {!(topAppsData[appUsageRange]?.length) ? (
+          <div className="core-h-[160px] core-flex core-flex-col core-items-center core-justify-center core-gap-2 core-rounded-xl core-border-2 core-border-dashed core-border-borderBase-light dark:core-border-borderBase-dark core-text-textMuted-light dark:core-text-textMuted-dark">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="core-opacity-40"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <p className="core-text-[11px] core-font-semibold core-opacity-50">No data available</p>
+          </div>
+        ) : (
         <ResponsiveContainer width="100%" height={160}>
           <BarChart layout="vertical" data={topAppsData[appUsageRange]} margin={{ left: 0, right: 10 }}>
             <defs>
@@ -171,6 +184,7 @@ function Charts({
             />
           </BarChart>
         </ResponsiveContainer>
+        )}
       </div>
 
       <div className="core-rounded-2xl core-p-5 core-shadow-lg core-bg-card-light dark:core-bg-card-dark core-border core-border-borderBase-light dark:core-border-borderBase-dark">
@@ -192,6 +206,12 @@ function Charts({
             </button>
           </div>
         </div>
+        {pieData.length === 0 ? (
+          <div className="core-h-[160px] core-flex core-flex-col core-items-center core-justify-center core-gap-2 core-rounded-xl core-border-2 core-border-dashed core-border-borderBase-light dark:core-border-borderBase-dark core-text-textMuted-light dark:core-text-textMuted-dark">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="core-opacity-40"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 6.364 15.364M12 3v9l4 4"/></svg>
+            <p className="core-text-[11px] core-font-semibold core-opacity-50">No data available</p>
+          </div>
+        ) : (
         <div className="core-flex core-items-center core-gap-2">
           <ResponsiveContainer width="52%" height={160}>
             <PieChart>
@@ -230,6 +250,7 @@ function Charts({
             ))}
           </div>
         </div>
+        )}
       </div>
     </div>
   );

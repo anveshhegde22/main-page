@@ -70,7 +70,13 @@ export default function MaximizedWorkflowTable({
                 </tr>
               </thead>
               <tbody className="core-divide-y core-divide-borderBase-light dark:core-divide-borderBase-dark">
-                {workflows.map((row) => {
+                {workflows.length === 0 ? (
+                  <tr>
+                    <td colSpan={8} className="core-px-6 core-py-12 core-text-center core-text-sm core-font-semibold core-text-textMuted-light dark:core-text-textMuted-dark">
+                      No task found
+                    </td>
+                  </tr>
+                ) : workflows.map((row) => {
                   const fallback = getWorkflowStatus(row.pending, dark);
                   const { dotColor, badgeBg, badgeText, badgeBorder } = workflowStatuses.find((status) => status.id === row.id) ?? fallback;
                   return (

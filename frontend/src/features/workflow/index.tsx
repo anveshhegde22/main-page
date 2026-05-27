@@ -50,7 +50,13 @@ function WorkflowTable({
             </tr>
           </thead>
           <tbody className="core-divide-y core-divide-borderBase-light dark:core-divide-borderBase-dark">
-            {workflows.map((row, index) => {
+            {workflows.length === 0 ? (
+              <tr>
+                <td colSpan={5} className="core-px-5 core-py-10 core-text-center core-text-[12px] core-font-semibold core-text-textMuted-light dark:core-text-textMuted-dark">
+                  No task found
+                </td>
+              </tr>
+            ) : workflows.map((row, index) => {
               const { dotColor, badgeBg, badgeText, badgeBorder } = workflowStatuses[index];
               return (
                 <tr key={row.id} className="core-group core-transition-all core-duration-300 core-cursor-pointer odd:core-bg-transparent even:core-bg-black/[0.02] dark:even:core-bg-white/[0.02] hover:core-bg-indigo-500/5 dark:hover:core-bg-indigo-500/10">

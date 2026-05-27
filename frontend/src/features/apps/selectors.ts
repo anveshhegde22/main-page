@@ -8,6 +8,7 @@ function matchesAppSearch(app: AppItem, query: string) {
   }
 
   return [
+    app.app_id?.toString(),
     app.name,
     app.tag,
     app.accessType,
