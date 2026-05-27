@@ -183,7 +183,7 @@ export default function AppShell() {
     } else if (appsView === "all") {
       fetchApps({
         limit: true,
-        userConfig: true,
+        userConfig: false,
       });
     }
   }, [appsView, fetchCardFavApps, fetchApps, selectedSearchApp]);
@@ -396,7 +396,7 @@ export default function AppShell() {
           drawerOpen ? (
             <>
               <div className="core-fixed core-inset-x-0 core-bottom-0 core-top-[41px] sm:core-top-[45px] core-z-40 core-bg-black/45 core-backdrop-blur-[2px] core-opacity-100 core-pointer-events-auto" />
-              <div className="core-fixed core-top-[41px] sm:core-top-[45px] core-right-0 core-bottom-0 core-z-40 core-flex core-flex-col core-shadow-2xl core-border-l core-border-borderBase-light dark:core-border-borderBase-dark core-bg-white dark:core-bg-gradient-to-br dark:core-from-[#15132b] dark:core-to-[#1a1730] core-w-full sm:core-w-[clamp(320px,38vw,480px)] core-translate-x-0">
+              <div className="core-fixed core-top-[41px] sm:core-top-[45px] core-right-0 core-bottom-0 core-z-40 core-flex core-flex-col core-shadow-2xl core-border-l core-border-borderBase-light dark:core-border-borderBase-dark core-bg-card-light dark:core-bg-card-dark core-w-full sm:core-w-[400px] core-overflow-hidden">
                 <DrawerSkeleton />
               </div>
             </>
@@ -419,7 +419,7 @@ export default function AppShell() {
 
         <button
           onClick={scrollToTop}
-          className={`core-fixed core-bottom-6 core-right-6 core-z-[60] core-p-3 core-rounded-full core-shadow-2xl core-bg-indigo-600 core-text-white core-transition-all core-duration-300 ${showBackToTop ? "core-opacity-100 core-translate-y-0 core-pointer-events-auto" : "core-opacity-0 core-translate-y-10 core-pointer-events-none"} hover:core-bg-indigo-700`}
+          className={`core-fixed core-bottom-6 core-right-6 core-z-[60] core-p-3 core-rounded-full core-shadow-2xl core-bg-indigo-600 core-text-white core-transition-all core-duration-300 ${showBackToTop ? "core-opacity-100 core-pointer-events-auto" : "core-opacity-0 core-pointer-events-none"}`}
           title="Back to Top"
         >
           <IconArrowUp size={20} className="core-stroke-[2.5]" />
